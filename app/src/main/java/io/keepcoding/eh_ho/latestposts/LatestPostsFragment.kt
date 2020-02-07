@@ -8,30 +8,63 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.R
 import io.keepcoding.eh_ho.data.PostsRepo
 import io.keepcoding.eh_ho.data.RequestError
 import io.keepcoding.eh_ho.data.TopicsRepo
 import kotlinx.android.synthetic.main.fragment_topics.*
+import kotlinx.android.synthetic.main.latest_posts_fragment.*
 
 
-class LatestPostsFragment : Fragment() {
+class LatestPostsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
+    var listener: LatestPostInteractionListener? = null
+    lateinit var adapter: LatestPostsAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LatestPostInteractionListener)
+            listener = context
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //  setHasOptionsMenu(true)
+
+        adapter = LatestPostsAdapter {
+           // detailPost(it)
+        }
+
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.latest_posts_activity, container, false)
+        return inflater.inflate(R.layout.latest_posts_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listLatestPosts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        listLatestPosts.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
+        listLatestPosts.adapter = adapter
+        swipeRefreshLatest.setOnRefreshListener {
+            Log.v("SWIPEEEEEEEE........", "Aquí")
+            loadLatestPosts()
+            swipeRefreshLatest.isRefreshing = false
+        }
+    }
 
 
+    override fun onRefresh() {
+        loadLatestPosts()
     }
 
 
@@ -51,7 +84,7 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
                 {
                    // enableLoading(false)
                     Log.d("éxito.................", "LOAD")
-                   // adapter.setTopics(it)
+                   adapter.setPosts(it)
                 },
                 {
                     //enableLoading(false)
@@ -92,5 +125,10 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
         Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show()
     }
 */
+
+    interface LatestPostInteractionListener {
+        fun onPostSelected()
+    }
+
 
 }
