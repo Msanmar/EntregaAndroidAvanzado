@@ -24,6 +24,14 @@ object ApiRoutes {
             .build()
             .toString()
 
+    //https://discourse.example.com/posts.json
+
+    fun getLatestPosts() =
+        uriBuilder()
+            .appendPath("posts.json")
+            .build()
+            .toString()
+
     //https://docs.discourse.org/#tag/Topics/paths/~1t~1{id}.json/get
     //https://discourse.example.com/t/{id}/posts.json
    fun getPosts(topicId: Int) =
