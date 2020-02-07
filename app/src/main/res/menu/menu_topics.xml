@@ -5,5 +5,8 @@
         android:id="@+id/action_log_out"
         android:title="@string/title_log_out" />
 
+    <item
+        android:id="@+id/action_latest_posts"
+        android:title="Go To Latest Posts" />
 
 </menu>

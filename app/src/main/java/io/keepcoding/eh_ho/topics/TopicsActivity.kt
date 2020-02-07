@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.keepcoding.eh_ho.*
 import io.keepcoding.eh_ho.data.Topic
 import io.keepcoding.eh_ho.data.UserRepo
+import io.keepcoding.eh_ho.latestposts.LatestPostsActivity
 import io.keepcoding.eh_ho.login.LoginActivity
 import io.keepcoding.eh_ho.posts.CreatePostFragment
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
@@ -51,6 +52,12 @@ class TopicsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionList
         UserRepo.logOut(this)
 
         val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onGoToLatestPosts() {
+        val intent = Intent(this, LatestPostsActivity:: class.java)
         startActivity(intent)
         finish()
     }

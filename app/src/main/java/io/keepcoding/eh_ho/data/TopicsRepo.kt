@@ -10,6 +10,8 @@ import org.json.JSONObject
 
 object TopicsRepo {
 
+    //TODO instanciar base de datos (build)
+
     fun getTopics(
         context: Context,
         onSuccess: (List<Topic>) -> Unit,

@@ -116,6 +116,7 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         when (item.itemId) {
             R.id.action_log_out -> listener?.onLogOut()
             // R.id.action_create_post -> listenerCreatePost?.onCreatePostFromTopics()
+            R.id.action_latest_posts -> listener?.onGoToLatestPosts()
 
         }
         return super.onOptionsItemSelected(item)
@@ -186,7 +187,9 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     interface TopicsInteractionListener {
             fun onTopicSelected(topic: Topic)
             fun onGoToCreateTopic()
+
             fun onLogOut()
+          fun onGoToLatestPosts()
     }
 
 

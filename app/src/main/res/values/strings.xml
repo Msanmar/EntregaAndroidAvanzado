@@ -30,6 +30,8 @@
     <string name="label_retry">Retry</string>
     <string name="label_create_topic">Create topic</string>
     <string name="hint_topicID">topicID</string>
+    <string name="title_latests_posts">title_latest_posts</string>
+    <string name="title_latest_posts">title_latest_posts</string>
 
     <plurals name="years">
         <item quantity="one">%d year</item>
