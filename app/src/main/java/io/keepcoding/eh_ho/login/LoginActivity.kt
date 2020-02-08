@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
@@ -12,6 +13,7 @@ import io.keepcoding.eh_ho.data.RequestError
 import io.keepcoding.eh_ho.data.SignInModel
 import io.keepcoding.eh_ho.data.SignUpModel
 import io.keepcoding.eh_ho.data.UserRepo
+import io.keepcoding.eh_ho.home.HomeActivity
 import io.keepcoding.eh_ho.topics.TopicsActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -34,10 +36,15 @@ class LoginActivity : AppCompatActivity(),
     }
 
     private fun checkSession() {
-        if (UserRepo.isLogged(this))
-            launchTopicsActivity()
-        else
+        if (UserRepo.isLogged(this)) {
+            //launchTopicsActivity()
+
+            Log.d("Home", "HOME_____________________")
+            launchHomeActivity()
+        }
+        else {
             onGoToSignIn()
+        }
     }
 
     override fun onGoToSignUp() {
@@ -57,7 +64,8 @@ class LoginActivity : AppCompatActivity(),
         UserRepo.signIn(this, signInModel,
             {
                 enableLoading(false)
-                launchTopicsActivity()
+                //launchTopicsActivity()
+                launchHomeActivity()
             },
             {
                 enableLoading(false)
@@ -71,7 +79,8 @@ class LoginActivity : AppCompatActivity(),
             signUpModel,
             {
                 enableLoading(false)
-                launchTopicsActivity()
+                //launchTopicsActivity()
+                launchHomeActivity()
             },
             {
                 enableLoading(false)
@@ -102,6 +111,12 @@ class LoginActivity : AppCompatActivity(),
 
     private fun launchTopicsActivity() {
         val intent = Intent(this, TopicsActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun launchHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }

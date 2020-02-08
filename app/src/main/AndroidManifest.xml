@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".posts.PostsActivity"></activity>
+        <activity android:name=".topics.TopicsActivity" ></activity>
+        <activity android:name=".latestposts.LatestPostsActivity"></activity>
+        <activity android:name=".home.HomeActivity"></activity>
+
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme">
@@ -21,8 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".topics.TopicsActivity" />
-        <activity android:name=".latestposts.LatestPostsActivity"/>
+
     </application>
 
 </manifest>
