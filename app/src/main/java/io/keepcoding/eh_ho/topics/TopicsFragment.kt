@@ -35,6 +35,7 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        Log.d("TopicsFragment", "__________!!!!!!!! on Attach")
         if (context is TopicsInteractionListener)
             listener = context
     }
@@ -42,7 +43,7 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
+        Log.d("TopicsFragment", "__________!!!!!!!! onCreate")
         adapter = TopicsAdapter {
         goToPosts(it)
         }
@@ -57,13 +58,14 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("TopicsFragment", "__________onCreateView")
         return inflater.inflate(R.layout.fragment_topics, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        Log.d("TopicsFragment", "__________onViewCreated")
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listTopics.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         listTopics.adapter = adapter
@@ -87,6 +89,7 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
         buttonCreate.setOnClickListener {
+            Log.d("TopicsFragment","_______--goToCreateTopic")
             goToCreateTopic()
         }
 

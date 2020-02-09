@@ -14,7 +14,7 @@
         <activity android:name=".posts.PostsActivity"></activity>
         <activity android:name=".topics.TopicsActivity" ></activity>
         <activity android:name=".latestposts.LatestPostsActivity"></activity>
-        <activity android:name=".home.HomeActivity"></activity>
+        <activity android:name=".home.MainActivity"></activity>
 
         <activity
             android:name=".login.LoginActivity"

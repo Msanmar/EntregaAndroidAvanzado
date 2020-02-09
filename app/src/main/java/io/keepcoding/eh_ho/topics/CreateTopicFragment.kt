@@ -2,6 +2,7 @@ package io.keepcoding.eh_ho.topics
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,8 @@ import io.keepcoding.eh_ho.data.CreateTopicModel
 import io.keepcoding.eh_ho.data.RequestError
 import io.keepcoding.eh_ho.data.TopicsRepo
 import io.keepcoding.eh_ho.posts.CreatePostFragment
+import io.keepcoding.eh_ho.home.MainActivity
+import kotlinx.android.synthetic.main.fragment_create_topic.parentLayout
 import kotlinx.android.synthetic.main.fragment_create_topic.*
 
 const val TAG_LOADING_DIALOG = "loading_dialog"
@@ -24,7 +27,7 @@ class CreateTopicFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
+        Log.d("Create Topic Fragment", "........ ON ATACH")
         if (context is CreateTopicInteractionListener)
             listener = context
     }
@@ -32,7 +35,7 @@ class CreateTopicFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
+        Log.d("Create Topic Fragment", "........ ON CREATE")
         loadingDialog = LoadingDialogFragment.newInstance(getString(R.string.label_create_topic))
     }
 
@@ -41,7 +44,9 @@ class CreateTopicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_create_topic, container, false)
+        Log.d("Create Topic Fragment", "........ ON VIEW_CREATED")
+       return inflater.inflate(R.layout.fragment_create_topic, container, false)
+        //return inflater.inflate(R.layout.fragment_create_topic,container,false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

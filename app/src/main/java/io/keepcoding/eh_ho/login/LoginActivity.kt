@@ -1,21 +1,21 @@
 package io.keepcoding.eh_ho.login
 
 import android.content.Intent
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
+import io.keepcoding.eh_ho.home.MainActivity
 import io.keepcoding.eh_ho.R
 import io.keepcoding.eh_ho.data.RequestError
 import io.keepcoding.eh_ho.data.SignInModel
 import io.keepcoding.eh_ho.data.SignUpModel
 import io.keepcoding.eh_ho.data.UserRepo
-import io.keepcoding.eh_ho.home.HomeActivity
+
 import io.keepcoding.eh_ho.topics.TopicsActivity
 import kotlinx.android.synthetic.main.activity_login.*
+
 
 class LoginActivity : AppCompatActivity(),
     SignInFragment.SignInInteractionListener,
@@ -37,9 +37,9 @@ class LoginActivity : AppCompatActivity(),
 
     private fun checkSession() {
         if (UserRepo.isLogged(this)) {
-            //launchTopicsActivity()
+           // launchTopicsActivity()
 
-            Log.d("Home", "HOME_____________________")
+            Log.d("CheckSessión en Login Activity", "Vamos a MainActiivty")
             launchHomeActivity()
         }
         else {
@@ -116,7 +116,8 @@ class LoginActivity : AppCompatActivity(),
     }
 
     private fun launchHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
+        Log.d("LaunchHomeActivity....", "Vamos a MainActivity")
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

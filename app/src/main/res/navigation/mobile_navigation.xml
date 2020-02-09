@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_topics">
+
+    <fragment
+        android:id="@+id/nav_topics"
+        android:name="io.keepcoding.eh_ho.topics.TopicsFragment"
+        android:label="Latest Topics"
+        tools:layout="@layout/fragment_topics" />
+
+    <fragment
+        android:id="@+id/nav_posts"
+        android:name="io.keepcoding.eh_ho.latestposts.LatestPostsFragment"
+        android:label="Latest Posts"
+        tools:layout="@layout/latest_posts_fragment" />
+
+    <fragment
+        android:id="@+id/nav_create_topic"
+        android:name="io.keepcoding.eh_ho.topics.CreateTopicFragment"
+        android:label="Latest Posts"
+        tools:layout="@layout/fragment_create_topic" />
+
+</navigation>

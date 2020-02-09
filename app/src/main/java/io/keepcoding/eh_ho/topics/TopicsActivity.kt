@@ -18,7 +18,7 @@ import io.keepcoding.eh_ho.posts.PostsActivity
 
 const val TRANSACTION_CREATE_TOPIC = "create_topic"
 
-class TopicsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener {
+class TopicsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,22 +33,22 @@ class TopicsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionList
 
 
 
-    //Métodos interfaz
-    override fun onTopicSelected(topic: Topic) {
+    //Métodos interfaz TopicsInteractionListerner
+   /* override fun onTopicSelected(topic: Topic) {
        //Toast.makeText(this, topic.title, Toast.LENGTH_SHORT).show()
         goToPosts(topic)
-    }
+    }*/
 
-    override fun onGoToCreateTopic() {
+   /* override fun onGoToCreateTopic() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, CreateTopicFragment())
             .addToBackStack(TRANSACTION_CREATE_TOPIC)
             .commit()
-    }
+    }*/
 
 
 
-    override fun onLogOut() {
+   /* override fun onLogOut() {
         UserRepo.logOut(this)
 
         val intent = Intent(this, LoginActivity::class.java)
@@ -60,11 +60,13 @@ class TopicsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionList
         val intent = Intent(this, LatestPostsActivity:: class.java)
         startActivity(intent)
         finish()
-    }
+    }*/
 
-    override fun onTopicCreated() {
+
+
+   /* override fun onTopicCreated() {
         supportFragmentManager.popBackStack()
-    }
+    }*/
 
 
 
