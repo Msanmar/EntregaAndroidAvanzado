@@ -16,22 +16,42 @@ import io.keepcoding.eh_ho.R
 import io.keepcoding.eh_ho.data.PostsRepo
 import io.keepcoding.eh_ho.data.RequestError
 import io.keepcoding.eh_ho.data.TopicsRepo
+import io.keepcoding.eh_ho.di.ApplicationGraph
+import io.keepcoding.eh_ho.di.DaggerApplicationGraph
+import dagger.*
+import io.keepcoding.eh_ho.di.PostsModule
+import io.keepcoding.eh_ho.di.UtilsModule
+
 import kotlinx.android.synthetic.main.fragment_topics.*
 import kotlinx.android.synthetic.main.latest_posts_fragment.*
 
+import javax.inject.Inject
 
-class LatestPostsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
 
     var listener: LatestPostInteractionListener? = null
     lateinit var adapter: LatestPostsAdapter
 
+
+
     override fun onAttach(context: Context) {
+      //  Log.d("LATEST POST FRAGMENT ","ON ATTACH______________****************************************")
+
+  //   DaggerApplicationGraph.builder().utilsModule(UtilsModule(context)).build().inject(this)
         super.onAttach(context)
+
         if (context is LatestPostInteractionListener)
             listener = context
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        Log.d("LATEST POST FRAGMENT ","ON CREATE______________****************************************")
+     // DaggerApplicationGraph.builder().utilsModule(UtilsModule(appcontext)).build().inject(this)
+
         super.onCreate(savedInstanceState)
         //  setHasOptionsMenu(true)
 
@@ -47,6 +67,18 @@ class LatestPostsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.latest_posts_fragment, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.d("LATEST POST FRAGMENT ","On activity created______________****************************************")
+
+    /*var ctx = activity as Context
+        var ctx2 = context
+
+      DaggerApplicationGraph.builder()
+            .utilsModule(UtilsModule(ctx2!!)).build()
+            .inject(this)*/
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +109,7 @@ class LatestPostsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun loadLatestPosts() {
        // enableLoading(true)
 
+
 Log.d("LOAD LATEST POSTS..........", "LOAD")
 
         context?.let {
@@ -92,6 +125,9 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
                   //handleRequestError(it)
                 })
         }
+
+        Log.d("LOAD LATEST POSTS..........", "fin load")
+
     }
 
 

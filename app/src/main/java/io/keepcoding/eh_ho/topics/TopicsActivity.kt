@@ -3,6 +3,7 @@ package io.keepcoding.eh_ho.topics
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock.sleep
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.keepcoding.eh_ho.*
@@ -22,6 +23,7 @@ class TopicsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("TOPICS_ACTIVITY","______________****************************************")
         setContentView(R.layout.activity_topics)
         this.title = "Eh-Ho:       Latest Topics"
         if (savedInstanceState == null) {

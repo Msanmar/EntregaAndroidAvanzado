@@ -1,5 +1,6 @@
 package io.keepcoding.eh_ho.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,14 +27,28 @@ import io.keepcoding.eh_ho.posts.PostsActivity
 import io.keepcoding.eh_ho.topics.CreateTopicFragment
 import io.keepcoding.eh_ho.topics.TRANSACTION_CREATE_TOPIC
 import io.keepcoding.eh_ho.topics.TopicsFragment
+import io.keepcoding.eh_ho.di.ApplicationGraph
+import io.keepcoding.eh_ho.di.DaggerApplicationGraph
+import io.keepcoding.eh_ho.di.UtilsModule
+import javax.inject.Inject
+import io.keepcoding.eh_ho.latestposts.LatestPostsFragment
 
 const val TRANSACTION_CREATE_TOPIC = "create_topic"
 
 class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener  {
 
+
+
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        var ctx = applicationContext
+        DaggerApplicationGraph.builder()
+            .utilsModule(UtilsModule(applicationContext)).build()
+            .inject(this)
+
+       // DaggerApplicationGraph.builder().utilsModule(UtilsModule(context)).build().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
        // val toolbar: Toolbar = findViewById(R.id.toolbar)

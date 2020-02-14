@@ -1,32 +1,28 @@
 package io.keepcoding.eh_ho.data
 
 import android.content.Context
+import android.os.Handler
 import android.util.Log
+import androidx.room.Room
+import io.keepcoding.eh_ho.data.PostsDatabase
 import com.android.volley.NetworkError
 import com.android.volley.Request
 import com.android.volley.ServerError
 import io.keepcoding.eh_ho.R
 import org.json.JSONObject
+import kotlin.concurrent.thread
 
 
-object PostsRepo {
+object PostsRepo  {
 
 
-   /* val posts: MutableList<Post> = mutableListOf()
-        get() {
-            if (field.isEmpty())
-                field.addAll(dummyPosts())
 
-            return field
-        }
+    lateinit var db: PostsDatabase
+    lateinit var ctx: Context
 
-*/
-   /* fun dummyPosts(count: Int = 50): List<Post> {
-        return (1..count).map {
-          Post(content = "Content $it", title = "Title $it", author = "Author $it", topicId = 1)
-        }
-    }
-*/
+
+
+
     fun getPosts(
         context: Context,
         topicId: Int,
@@ -67,7 +63,17 @@ object PostsRepo {
         onSuccess: (List<LatestPost>) -> Unit,
         onError: (RequestError) -> Unit
     ) {
+
+
+
+        Log.d("GET LATEST POSTS", "...... POSTS REPO.................")
+
+        var db : PostsDatabase = Room.databaseBuilder(
+            context, PostsDatabase::class.java, "posts_database"
+        ).build()
+
         val username = UserRepo.getUsername(context)
+        Log.d("username" , username)
         val request = UserRequest(
             username,
             Request.Method.GET,
@@ -77,6 +83,10 @@ object PostsRepo {
                 it?.let {
 
                     onSuccess.invoke(LatestPost.parseLatestPosts(it))
+                    thread {
+                       db.postDao().insertAll(LatestPost.parseLatestPosts(it).toEntity())
+                        Log.d("GUARDANDO EN BBBD", "................. GUARDANDO")
+                    }
                 }
 
                 if (it == null)
@@ -143,3 +153,17 @@ object PostsRepo {
 
 
 }
+
+private fun List<LatestPost>.toEntity(): List<LatestPostEntity> = map { it.toEntity() }
+
+private fun LatestPost.toEntity(): LatestPostEntity = LatestPostEntity(
+
+    topic_title = topic_title,
+    topicId = topicId,
+    topic_slug = topic_slug,
+    post_number = post_number,
+    post_title = post_title,
+    author = author,
+   date = date.toString()
+)
+

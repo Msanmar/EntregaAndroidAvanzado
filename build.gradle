@@ -7,6 +7,10 @@ buildscript {
         jcenter()
         
     }
+    ext {
+        androidxroom_version = '2.2.3'
+        dagger_version = '2.25.4'
+    }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
