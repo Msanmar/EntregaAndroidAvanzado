@@ -43,10 +43,10 @@ class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var ctx = applicationContext
+    /*    var ctx = applicationContext
         DaggerApplicationGraph.builder()
             .utilsModule(UtilsModule(applicationContext)).build()
-            .inject(this)
+            .inject(this)*/
 
        // DaggerApplicationGraph.builder().utilsModule(UtilsModule(context)).build().inject(this)
         super.onCreate(savedInstanceState)

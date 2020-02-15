@@ -61,7 +61,6 @@ class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener 
 
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,15 +68,14 @@ class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener 
         return inflater.inflate(R.layout.latest_posts_fragment, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.d("LATEST POST FRAGMENT ","On activity created______________****************************************")
+        Log.d("LATEST POST FRAGMENT ","On activity created______________******")
 
-    /*var ctx = activity as Context
-        var ctx2 = context
-
+    var ctx = context!!
       DaggerApplicationGraph.builder()
-            .utilsModule(UtilsModule(ctx2!!)).build()
-            .inject(this)*/
+            .utilsModule(UtilsModule(ctx)).build()
+            .inject(this)
         super.onActivityCreated(savedInstanceState)
     }
 
@@ -111,6 +109,7 @@ class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener 
 
 
 Log.d("LOAD LATEST POSTS..........", "LOAD")
+
 
         context?.let {
             PostsRepo.getLatestPosts(it,

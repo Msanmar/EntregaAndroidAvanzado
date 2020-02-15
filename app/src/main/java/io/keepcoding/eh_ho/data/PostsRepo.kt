@@ -16,10 +16,52 @@ import kotlin.concurrent.thread
 object PostsRepo  {
 
 
-
     lateinit var db: PostsDatabase
     lateinit var ctx: Context
 
+    fun getLatestPosts(
+        context: Context,
+        onSuccess: (List<LatestPost>) -> Unit,
+        onError: (RequestError) -> Unit
+    ) {
+
+        Log.d("GET LATEST POSTS", "...... POSTS REPO.................")
+
+     /*   var db : PostsDatabase = Room.databaseBuilder(
+            context, PostsDatabase::class.java, "posts_database"
+        ).build()*/
+
+        val username = UserRepo.getUsername(context)
+
+        val request = UserRequest(
+            username,
+            Request.Method.GET,
+            ApiRoutes.getLatestPosts(),
+            null,
+            {
+                it?.let {
+
+                    onSuccess.invoke(LatestPost.parseLatestPosts(it))
+                    thread {
+                       db.postDao().insertAll(LatestPost.parseLatestPosts(it).toEntity())
+                        Log.d("GUARDADOS POSTS EN BBBD", "................. OK GUARDADOS")
+                    }
+                }
+
+                if (it == null)
+                    onError.invoke(RequestError(messageResId = R.string.error_invalid_response))
+            },
+            {
+                it.printStackTrace()
+                if (it is NetworkError)
+                    onError.invoke(RequestError(messageResId = R.string.error_network))
+                else
+                    onError.invoke(RequestError(it))
+            })
+
+        ApiRequestQueue.getRequestQueue(context)
+            .add(request)
+    }
 
 
 
@@ -57,52 +99,6 @@ object PostsRepo  {
     }
 
 
-
-    fun getLatestPosts(
-        context: Context,
-        onSuccess: (List<LatestPost>) -> Unit,
-        onError: (RequestError) -> Unit
-    ) {
-
-
-
-        Log.d("GET LATEST POSTS", "...... POSTS REPO.................")
-
-        var db : PostsDatabase = Room.databaseBuilder(
-            context, PostsDatabase::class.java, "posts_database"
-        ).build()
-
-        val username = UserRepo.getUsername(context)
-        Log.d("username" , username)
-        val request = UserRequest(
-            username,
-            Request.Method.GET,
-            ApiRoutes.getLatestPosts(),
-            null,
-            {
-                it?.let {
-
-                    onSuccess.invoke(LatestPost.parseLatestPosts(it))
-                    thread {
-                       db.postDao().insertAll(LatestPost.parseLatestPosts(it).toEntity())
-                        Log.d("GUARDANDO EN BBBD", "................. GUARDANDO")
-                    }
-                }
-
-                if (it == null)
-                    onError.invoke(RequestError(messageResId = R.string.error_invalid_response))
-            },
-            {
-                it.printStackTrace()
-                if (it is NetworkError)
-                    onError.invoke(RequestError(messageResId = R.string.error_network))
-                else
-                    onError.invoke(RequestError(it))
-            })
-
-        ApiRequestQueue.getRequestQueue(context)
-            .add(request)
-    }
 
     fun createPost(
         context: Context,

@@ -21,6 +21,6 @@ class UtilsModule(private val context: Context) {
         context, PostsDatabase::class.java, "posts_database"
     ).build()
 
-   // fun providePostDb() : PostsDatabase = Room.databaseBuilder(context, PostsDatabase::class.java, "posts_database").build()
+
 
 }

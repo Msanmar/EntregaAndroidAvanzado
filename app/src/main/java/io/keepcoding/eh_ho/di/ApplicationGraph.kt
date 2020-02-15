@@ -17,7 +17,7 @@ interface ApplicationGraph {
     // Add here as well functions whose input argument is the entity in which Dagger can add any
     // dependency you want
 
- //   fun inject(latestPostsFragment: LatestPostsFragment)
+    fun inject(latestPostsFragment: LatestPostsFragment)
     //fun inject(latestPostsActivity: LatestPostsActivity)
     fun inject (mainActivity: MainActivity)
 }

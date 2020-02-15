@@ -12,11 +12,7 @@ class PostsModule {
 
     @Singleton
     @Provides
-            /* fun providePostRepo(context: Context, postDatabase: PostsDatabase): PostsRepo =
-        PostsRepo.apply {
-            db = postDatabase
-            ctx = context
-        }*/
+
     fun providePostRepo(context: Context, postDatabase: PostsDatabase): PostsRepo {
         PostsRepo.ctx = context
         PostsRepo.db = postDatabase
