@@ -10,54 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37fc2770-cb71-49f4-bfaf-dbbe7de66d70" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/AdminRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/AdminRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/ApiModels.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/domain/ApiModels.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/ApiRequestQueue.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/ApiRequestQueue.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/ApiRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/ApiRoutes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/AuthenticationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/AuthenticationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/Models.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/domain/Models.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/PostsDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/database/PostsDatabase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/PostsRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/repository/PostsRepo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/RequestError.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/RequestError.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/TopicsRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/repository/TopicsRepo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/UserRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/repository/UserRepo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/UserRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/data/service/UserRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/ApplicationGraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/ApplicationGraph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/PostsModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/PostsModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/UtilsModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/di/UtilsModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/home/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/home/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/latestposts/LatestPostsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/SignInFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/SignInFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/SignUpFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/login/SignUpFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/CreatePostFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/CreatePostFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/posts/PostsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/CreateTopicFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/CreateTopicFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/keepcoding/eh_ho/topics/TopicsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_topics2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/CreateTopicModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/CreateTopicModelTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/SignUpModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/SignUpModelTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/TopicModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/io/keepcoding/eh_ho/TopicModelTest.kt" afterDir="false" />
-    </list>
+    <list default="true" id="37fc2770-cb71-49f4-bfaf-dbbe7de66d70" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
