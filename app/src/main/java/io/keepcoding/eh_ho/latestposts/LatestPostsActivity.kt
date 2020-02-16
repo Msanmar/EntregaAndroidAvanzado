@@ -11,9 +11,10 @@ import io.keepcoding.eh_ho.*
 import io.keepcoding.eh_ho.di.DaggerApplicationGraph
 import io.keepcoding.eh_ho.di.PostsModule
 import io.keepcoding.eh_ho.di.UtilsModule
+import io.keepcoding.eh_ho.domain.LatestPost
 
 
-class LatestPostsActivity : AppCompatActivity() {
+class LatestPostsActivity : AppCompatActivity(), LatestPostsFragment.LatestPostInteractionListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,6 +30,12 @@ class LatestPostsActivity : AppCompatActivity() {
                 .add(R.id.fragmentContainer, LatestPostsFragment())
                 .commit()
         }
+    }
+
+
+    override fun onPostSelected(latestPost: LatestPost) {
+
+Log.d("LatestPostActivity", "...... OnPostSelected ${latestPost.post_title}")
     }
 
 }

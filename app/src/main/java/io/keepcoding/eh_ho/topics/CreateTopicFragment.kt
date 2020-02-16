@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.LoadingDialogFragment
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.CreateTopicModel
-import io.keepcoding.eh_ho.data.RequestError
-import io.keepcoding.eh_ho.data.TopicsRepo
-import io.keepcoding.eh_ho.posts.CreatePostFragment
-import io.keepcoding.eh_ho.home.MainActivity
+import io.keepcoding.eh_ho.domain.CreateTopicModel
+import io.keepcoding.eh_ho.data.service.RequestError
+import io.keepcoding.eh_ho.data.repository.TopicsRepo
 import kotlinx.android.synthetic.main.fragment_create_topic.parentLayout
 import kotlinx.android.synthetic.main.fragment_create_topic.*
 

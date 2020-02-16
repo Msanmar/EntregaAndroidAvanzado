@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_post.view.*
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.LatestPost
-import io.keepcoding.eh_ho.data.Post
+import io.keepcoding.eh_ho.domain.LatestPost
 import kotlinx.android.synthetic.main.item_post.view.labelDatePost
 import kotlinx.android.synthetic.main.item_post.view.labelTitlePost
 import kotlinx.android.synthetic.main.item_post.view.labelTopicID
@@ -58,7 +57,7 @@ class LatestPostsAdapter (val postClickListener: ((LatestPost) -> Unit)? = null)
                    // imageUser = it.
                     var lon = it.topic_title.length
 
-                    labelTitlePost.text = it.topic_title.substring(3, lon-4)
+                    labelTitlePost.text = it.topic_title.substring(0, lon)
                     //labelContentPost.text = it.content
                     labelDatePost.text = it.date.toString()
                     labelTopicID.text = "TopicID: " + it.topicId.toString()

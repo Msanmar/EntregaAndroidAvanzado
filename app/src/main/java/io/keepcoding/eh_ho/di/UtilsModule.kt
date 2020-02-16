@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import io.keepcoding.eh_ho.data.Post
-import io.keepcoding.eh_ho.data.PostsDatabase
+import io.keepcoding.eh_ho.database.PostsDatabase
 import javax.inject.Singleton
 
 @Module

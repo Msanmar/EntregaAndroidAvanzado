@@ -3,11 +3,8 @@ package io.keepcoding.eh_ho.topics
 
 import android.content.Context
 import android.os.Bundle
-import android.os.SystemClock.sleep
 import android.util.Log
 import android.view.*
-import android.widget.Toast
-import android.widget.Toast.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.RequestError
-import io.keepcoding.eh_ho.data.Topic
-import io.keepcoding.eh_ho.data.TopicsRepo
-import io.keepcoding.eh_ho.posts.CreatePostFragment
-import kotlinx.android.synthetic.main.fragment_posts.*
+import io.keepcoding.eh_ho.data.service.RequestError
+import io.keepcoding.eh_ho.domain.Topic
+import io.keepcoding.eh_ho.data.repository.TopicsRepo
 import kotlinx.android.synthetic.main.fragment_topics.*
 import kotlinx.android.synthetic.main.fragment_topics.buttonCreate
 import kotlinx.android.synthetic.main.fragment_topics.parentLayout

@@ -1,20 +1,17 @@
 package io.keepcoding.eh_ho.login
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.os.Handler
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.home.MainActivity
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.RequestError
-import io.keepcoding.eh_ho.data.SignInModel
-import io.keepcoding.eh_ho.data.SignUpModel
-import io.keepcoding.eh_ho.data.UserRepo
-import retrofit2.Retrofit
+import io.keepcoding.eh_ho.data.service.RequestError
+import io.keepcoding.eh_ho.domain.SignInModel
+import io.keepcoding.eh_ho.domain.SignUpModel
+import io.keepcoding.eh_ho.data.repository.UserRepo
 import retrofit2.Response
 import io.keepcoding.eh_ho.topics.TopicsActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -125,9 +122,17 @@ Log.d("LoginActivity________","___________onSignINWithRetrofitSyncCoroutines")
                             UserRepo.saveSession(this@LoginActivity,username = model.username)
                           launchHomeActivity()
                         }
-                        ?: run { handleRequestError(RequestError(message = "Body is null")) }
+                        ?: run { handleRequestError(
+                            RequestError(
+                                message = "Body is null"
+                            )
+                        ) }
                 } else {
-                    handleRequestError(RequestError(message = response.errorBody()?.toString()))
+                    handleRequestError(
+                        RequestError(
+                            message = response.errorBody()?.toString()
+                        )
+                    )
                 }
                 println("Lanzado")
             }

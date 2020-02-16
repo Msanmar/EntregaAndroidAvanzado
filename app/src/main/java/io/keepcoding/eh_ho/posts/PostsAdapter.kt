@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_post.view.*
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.Post
+import io.keepcoding.eh_ho.domain.Post
 import kotlinx.android.synthetic.main.item_post.view.labelDatePost
 import kotlinx.android.synthetic.main.item_post.view.labelTitlePost
 import kotlinx.android.synthetic.main.item_post.view.labelTopicID

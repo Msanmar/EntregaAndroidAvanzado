@@ -2,16 +2,10 @@ package io.keepcoding.eh_ho.topics
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock.sleep
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.keepcoding.eh_ho.*
-import io.keepcoding.eh_ho.data.Topic
-import io.keepcoding.eh_ho.data.UserRepo
-import io.keepcoding.eh_ho.latestposts.LatestPostsActivity
-import io.keepcoding.eh_ho.login.LoginActivity
-import io.keepcoding.eh_ho.posts.CreatePostFragment
+import io.keepcoding.eh_ho.domain.Topic
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_TITLE
 import io.keepcoding.eh_ho.posts.PostsActivity

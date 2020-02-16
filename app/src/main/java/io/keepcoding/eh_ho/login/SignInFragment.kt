@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.SignInModel
+import io.keepcoding.eh_ho.domain.SignInModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_in.inputPassword
 import kotlinx.android.synthetic.main.fragment_sign_in.inputUsername

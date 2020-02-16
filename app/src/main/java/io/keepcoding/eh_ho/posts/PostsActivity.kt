@@ -2,16 +2,9 @@ package io.keepcoding.eh_ho.posts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import io.keepcoding.eh_ho.R
-import kotlinx.android.synthetic.main.activity_posts.*
 import java.lang.IllegalArgumentException
-import io.keepcoding.eh_ho.*
-import io.keepcoding.eh_ho.data.Topic
-import io.keepcoding.eh_ho.data.UserRepo
-import io.keepcoding.eh_ho.login.LoginActivity
-import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
-import io.keepcoding.eh_ho.posts.PostsActivity
 
 const val EXTRA_TOPIC_ID = "topic_id"
 const val EXTRA_TOPIC_TITLE = "topic_title"
@@ -27,6 +20,7 @@ class PostsActivity : AppCompatActivity(), PostsFragment.PostsInteractionListene
         setContentView(R.layout.activity_posts)
 
         val topicId = intent.getStringExtra(EXTRA_TOPIC_ID)
+        Log.d("topicId",".........$topicId")
         val topicTitle = intent.getStringExtra(EXTRA_TOPIC_TITLE)
 
         if(topicId != null && topicId.isNotEmpty()) {

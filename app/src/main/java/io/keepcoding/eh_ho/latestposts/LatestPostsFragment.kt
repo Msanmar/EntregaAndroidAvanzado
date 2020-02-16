@@ -4,28 +4,19 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.PostsRepo
-import io.keepcoding.eh_ho.data.RequestError
-import io.keepcoding.eh_ho.data.TopicsRepo
-import io.keepcoding.eh_ho.di.ApplicationGraph
+import io.keepcoding.eh_ho.data.repository.PostsRepo
 import io.keepcoding.eh_ho.di.DaggerApplicationGraph
-import dagger.*
-import io.keepcoding.eh_ho.di.PostsModule
 import io.keepcoding.eh_ho.di.UtilsModule
+import io.keepcoding.eh_ho.domain.LatestPost
 
-import kotlinx.android.synthetic.main.fragment_topics.*
 import kotlinx.android.synthetic.main.latest_posts_fragment.*
-
-import javax.inject.Inject
 
 
 class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -56,7 +47,7 @@ class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener 
         //  setHasOptionsMenu(true)
 
         adapter = LatestPostsAdapter {
-           // detailPost(it)
+          goToTopic(it)
         }
 
     }
@@ -129,7 +120,9 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
 
     }
 
-
+private fun goToTopic(it: LatestPost) {
+    listener?.onPostSelected(it)
+}
     // ______________________________________LOAD LATEST POSTS____________________________________________
 
    /* private fun enableLoading(enabled: Boolean) {
@@ -162,7 +155,8 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
 */
 
     interface LatestPostInteractionListener {
-        fun onPostSelected()
+        fun onPostSelected(latestPost: LatestPost)
+
     }
 
 

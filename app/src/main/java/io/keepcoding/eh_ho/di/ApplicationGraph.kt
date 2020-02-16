@@ -1,9 +1,7 @@
 package io.keepcoding.eh_ho.di
 
 import dagger.Component
-import io.keepcoding.eh_ho.data.PostsRepo
 import io.keepcoding.eh_ho.home.MainActivity
-import io.keepcoding.eh_ho.latestposts.LatestPostsActivity
 import io.keepcoding.eh_ho.latestposts.LatestPostsFragment
 
 import javax.inject.Singleton

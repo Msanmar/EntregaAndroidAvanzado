@@ -1,11 +1,8 @@
 package io.keepcoding.eh_ho.home
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,28 +11,25 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import io.keepcoding.eh_ho.R
-import io.keepcoding.eh_ho.data.Topic
-import io.keepcoding.eh_ho.data.UserRepo
+import io.keepcoding.eh_ho.domain.Topic
+import io.keepcoding.eh_ho.data.repository.UserRepo
+import io.keepcoding.eh_ho.domain.LatestPost
 import io.keepcoding.eh_ho.latestposts.LatestPostsActivity
+import io.keepcoding.eh_ho.latestposts.LatestPostsFragment
 import io.keepcoding.eh_ho.login.LoginActivity
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_TITLE
 import io.keepcoding.eh_ho.posts.PostsActivity
 import io.keepcoding.eh_ho.topics.CreateTopicFragment
-import io.keepcoding.eh_ho.topics.TRANSACTION_CREATE_TOPIC
 import io.keepcoding.eh_ho.topics.TopicsFragment
-import io.keepcoding.eh_ho.di.ApplicationGraph
-import io.keepcoding.eh_ho.di.DaggerApplicationGraph
-import io.keepcoding.eh_ho.di.UtilsModule
-import javax.inject.Inject
-import io.keepcoding.eh_ho.latestposts.LatestPostsFragment
 
+const val EXTRA_TOPIC_ID = "topic_id"
+const val EXTRA_TOPIC_TITLE = "topic_title"
 const val TRANSACTION_CREATE_TOPIC = "create_topic"
 
-class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener  {
+class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener, LatestPostsFragment.LatestPostInteractionListener  {
 
 
 
@@ -123,6 +117,18 @@ class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
     //_______________Métodos interfaz CreateTopicInteractionListener
     override fun onTopicCreated() {
         supportFragmentManager.popBackStack()
+    }
+
+    override fun onPostSelected(latestPost: LatestPost) {
+        Log.d("LatestPostActivity", "...... OnPostSelected ${latestPost.topicId}")
+        //Mostramos una vista de detalle del detalle de ese topic, con todos sus posts
+        val intent = Intent(this, PostsActivity::class.java)
+        intent.putExtra(EXTRA_TOPIC_ID, latestPost.topicId.toString())
+        intent.putExtra(EXTRA_TOPIC_TITLE, latestPost.topic_title)
+
+        // Toast.makeText(this, "Vamos a post activity", Toast.LENGTH_SHORT).show()
+        startActivity(intent)
+
     }
 
 
