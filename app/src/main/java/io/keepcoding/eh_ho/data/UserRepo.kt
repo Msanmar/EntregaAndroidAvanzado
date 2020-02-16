@@ -9,13 +9,21 @@ import com.android.volley.ServerError
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import io.keepcoding.eh_ho.BuildConfig
 import io.keepcoding.eh_ho.R
 import java.lang.reflect.Method
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.concurrent.thread
 
 const val PREFERENCES_SESSION = "session"
 const val PREFERENCES_SESSION_USERNAME = "username"
 
 object UserRepo {
+
 
     fun signIn(
         context: Context,
@@ -56,6 +64,64 @@ object UserRepo {
             .getRequestQueue(context)
             .add(request)
     }
+
+
+    fun signInWithRetrofitAsynchronously(
+        context: Context,
+        signInModel: SignInModel,
+        onSuccess: (SignInModel) -> Unit,
+        onError: (RequestError) -> Unit
+    ) {
+
+
+        Log.d("______________"," SIGNIN WITH RETROFIT ASYNC ________")
+
+        var retroF : Retrofit = Retrofit.Builder()
+            .baseUrl("https://${BuildConfig.DiscourseDomain}")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+
+
+        // Llamada asíncrona
+        retroF.create(AuthenticationService::class.java)
+            .loginUser(signInModel.username)
+            .enqueue(object : Callback<SignInModel> {
+                override fun onFailure(call: Call<SignInModel>, exception: Throwable) {
+                    onError(RequestError(message = exception.message))
+                }
+
+                override fun onResponse(
+                    call: Call<SignInModel>,
+                    asyncResponse: Response<SignInModel>
+                ) {
+                    if (asyncResponse.isSuccessful) {
+                        asyncResponse.body().takeIf { it != null }
+                            ?.let(onSuccess)
+                            ?: run { onError(RequestError(message = "Body is null")) }
+                    } else {
+                        onError(RequestError(message = asyncResponse.errorBody()?.string()))
+                    }
+                }
+            })
+        println("done!")
+    }
+
+
+    //signInWithRetrofitSynchronouslyWithinCoroutines
+    suspend fun signInWithRetrofitSynchronouslyWithinCoroutines(signInModel: SignInModel): Response<SignInModel> {
+
+        var retroF : Retrofit = Retrofit.Builder()
+            .baseUrl("https://${BuildConfig.DiscourseDomain}")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retroF.create(AuthenticationService::class.java)
+            .loginUserWithCoroutines(signInModel.username)
+    }
+
+
+
 
     fun signUp(
         context: Context,
@@ -114,7 +180,7 @@ object UserRepo {
             .apply()
     }
 
-    private fun saveSession(context: Context, username: String) {
+    fun saveSession(context: Context, username: String) {
         val pref =
             context.applicationContext.getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE)
         pref.edit()

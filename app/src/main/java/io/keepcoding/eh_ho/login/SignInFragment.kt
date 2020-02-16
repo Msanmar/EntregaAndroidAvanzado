@@ -53,7 +53,10 @@ class SignInFragment : Fragment() {
                 inputPassword.text.toString()
             )
 
-            listener?.onSignIn(model)
+            //listener?.onSignIn(model)
+            //listener?.onSignInWithRetrofitAsync(model)
+            listener?.onSignInWithRetrofitSyncCoroutines(model)
+
         }
         else
             showFormErrors()
@@ -77,5 +80,7 @@ class SignInFragment : Fragment() {
     interface SignInInteractionListener {
         fun onGoToSignUp()
         fun onSignIn(username: SignInModel)
+        fun onSignInWithRetrofitAsync(model: SignInModel)
+        fun onSignInWithRetrofitSyncCoroutines(model: SignInModel)
     }
 }
