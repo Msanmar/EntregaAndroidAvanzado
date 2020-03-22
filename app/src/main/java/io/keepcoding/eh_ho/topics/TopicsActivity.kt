@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import io.keepcoding.eh_ho.*
 import io.keepcoding.eh_ho.domain.Topic
+import io.keepcoding.eh_ho.home.TRANSACTION_TOPIC_FRAGMENT
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_TITLE
 import io.keepcoding.eh_ho.posts.PostsActivity
@@ -22,7 +23,8 @@ class TopicsActivity : AppCompatActivity() {
         this.title = "Eh-Ho:       Latest Topics"
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, TopicsFragment())
+                .replace(R.id.fragmentContainer, TopicsFragment())
+                .addToBackStack(TRANSACTION_TOPIC_FRAGMENT)
                 .commit()
         }
     }

@@ -1,5 +1,6 @@
 package io.keepcoding.eh_ho.topics
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

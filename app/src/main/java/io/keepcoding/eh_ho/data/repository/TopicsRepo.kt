@@ -1,6 +1,7 @@
 package io.keepcoding.eh_ho.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.NetworkError
 import com.android.volley.Request
 import com.android.volley.ServerError
@@ -10,6 +11,7 @@ import io.keepcoding.eh_ho.data.service.ApiRoutes
 import io.keepcoding.eh_ho.data.service.RequestError
 import io.keepcoding.eh_ho.data.service.UserRequest
 import io.keepcoding.eh_ho.domain.CreateTopicModel
+import io.keepcoding.eh_ho.domain.FilteredTopic
 import io.keepcoding.eh_ho.domain.Topic
 import org.json.JSONObject
 
@@ -64,6 +66,65 @@ object TopicsRepo {
         ApiRequestQueue.getRequestQueue(context)
             .add(request)
     }
+
+
+
+
+    fun getFilteredTopics(
+        text: String,
+        context: Context,
+        onSuccess: (List<FilteredTopic>) -> Unit,
+        onError: (RequestError) -> Unit
+    ) {
+        val username = UserRepo.getUsername(context)
+        val request = UserRequest(
+            username,
+            Request.Method.GET,
+            ApiRoutes.getFilteredTopics(term=text,include_blurbs = true),
+            null,
+            {
+                it?.let {
+
+                    Log.d("ExitoGetFilteredTopics","TopicsRepo")
+                    onSuccess.invoke(
+                        //Topic.parseTopics(it)
+                         FilteredTopic.parseFilteredTopics(it)
+                    )
+                }
+
+                if (it == null)
+                    onError.invoke(
+                        RequestError(
+                            messageResId = R.string.error_invalid_response
+                        )
+                    )
+            },
+            {
+                it.printStackTrace()
+                if (it is NetworkError)
+                    onError.invoke(
+                        RequestError(
+                            messageResId = R.string.error_network
+                        )
+                    )
+                else
+                    onError.invoke(
+                        RequestError(
+                            it
+                        )
+                    )
+            })
+
+        ApiRequestQueue.getRequestQueue(context)
+            .add(request)
+    }
+
+
+
+
+
+
+
 
     fun createTopic(
         context: Context,

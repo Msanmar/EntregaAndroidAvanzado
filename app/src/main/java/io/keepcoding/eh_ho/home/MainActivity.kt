@@ -12,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import io.keepcoding.eh_ho.R
 import io.keepcoding.eh_ho.domain.Topic
 import io.keepcoding.eh_ho.data.repository.UserRepo
@@ -24,16 +27,23 @@ import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_TITLE
 import io.keepcoding.eh_ho.posts.PostsActivity
 import io.keepcoding.eh_ho.topics.CreateTopicFragment
 import io.keepcoding.eh_ho.topics.TopicsFragment
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_topics.*
 
 const val EXTRA_TOPIC_ID = "topic_id"
 const val EXTRA_TOPIC_TITLE = "topic_title"
 const val TRANSACTION_CREATE_TOPIC = "create_topic"
+const val TRANSACTION_TOPIC_FILTER_FRAGMENT = "topic_filter_fragment"
+const val TRANSACTION_TOPIC_FRAGMENT = "topic_fragment"
 
 class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener, LatestPostsFragment.LatestPostInteractionListener  {
 
 
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+var topicsFragment: TopicsFragment = TopicsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -45,10 +55,12 @@ class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
        // DaggerApplicationGraph.builder().utilsModule(UtilsModule(context)).build().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // val toolbar: Toolbar = findViewById(R.id.toolbar)
-      //  setSupportActionBar(toolbar)
 
-        Log.d("MainActivity", "drawer_layout, nav_view, nav_host_fragment")
+
+
+        Log.d("...........MainActivity", "drawer_layout, nav_view, nav_host_fragment")
+
+
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -57,20 +69,51 @@ class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-        Log.d("Vamos a configurar AppBAR","Vamos a configurar APP BAR")
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.nav_topics, R.id.nav_posts), drawerLayout
         )
 
-        Log.d("Asociamos navigation controller", "appBarConfiguracion")
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+
+
+        search_view.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                Log.d("SimpleSearchView", "Text changed:$newText")
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Log.d("..........MAIN ACTIVITY", ".......Submit text:$query")
+                //Toast.makeText(this, "Submit:$query", Toast.LENGTH_SHORT).show()
+
+
+
+
+                topicsFragment.getFilteredText(query)
+
+
+                 supportFragmentManager.beginTransaction()
+                   .replace(R.id.parentLayout, topicsFragment)
+                 .commit()
+
+
+                return true
+            }
+
+        })
+
         return true
     }
 

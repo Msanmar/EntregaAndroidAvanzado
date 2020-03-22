@@ -24,6 +24,21 @@ object ApiRoutes {
             .build()
             .toString()
 
+    fun getFilteredTopics(term: String, include_blurbs: Boolean) =
+        uriBuilder()
+           // .appendPath("search/query.json?term=${term}&include_blurbs=true")
+            .appendPath("search")
+            .appendPath("query.json")
+            .appendQueryParameter("term",term)
+            .appendQueryParameter("include_blurbs", "true")
+            .build()
+            .toString()
+
+
+
+
+   // https://mdiscourse.keepcoding.io/search/query?term=creado&include_blurbs=true
+
     //https://discourse.example.com/posts.json
 
     fun getLatestPosts() =

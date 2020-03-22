@@ -5,6 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +17,11 @@ import io.keepcoding.eh_ho.R
 import io.keepcoding.eh_ho.data.service.RequestError
 import io.keepcoding.eh_ho.domain.Topic
 import io.keepcoding.eh_ho.data.repository.TopicsRepo
+import io.keepcoding.eh_ho.domain.FilteredTopic
+import io.keepcoding.eh_ho.domain.Post
+import io.keepcoding.eh_ho.home.TRANSACTION_TOPIC_FILTER_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_topics.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_topics.buttonCreate
 import kotlinx.android.synthetic.main.fragment_topics.parentLayout
 import kotlinx.android.synthetic.main.fragment_topics.swiperefresh
@@ -30,7 +36,7 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d("TopicsFragment", "__________!!!!!!!! on Attach")
+        Log.d("............TopicsFragment", "__________!!!!!!!! on Attach")
         if (context is TopicsInteractionListener)
             listener = context
     }
@@ -38,35 +44,46 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        Log.d("TopicsFragment", "__________!!!!!!!! onCreate")
+        Log.d(".............TopicsFragment", "__________!!!!!!!! onCreate")
         adapter = TopicsAdapter {
-        goToPosts(it)
+
+            goToPosts(it)
         }
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_topics, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_topics, menu)
+
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("TopicsFragment", "__________onCreateView")
+        Log.d("............TopicsFragment", "__________onCreateView")
+
+
+
         return inflater.inflate(R.layout.fragment_topics, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("TopicsFragment", "__________onViewCreated")
+        Log.d("..............TopicsFragment", "__________onViewCreated")
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listTopics.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        //listTopics.removeAllViews()
         listTopics.adapter = adapter
 
 
-
+        //Mover floating según el scroll
         listTopics.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -83,15 +100,21 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
 
+
+
+
+        //Button Create Topic
         buttonCreate.setOnClickListener {
-            Log.d("TopicsFragment","_______--goToCreateTopic")
+            Log.d("..............TopicsFragment","_______--goToCreateTopic")
             goToCreateTopic()
         }
 
+        //Button Retry
         buttonRetry.setOnClickListener {
             loadTopics()
         }
 
+        //Refresh
         swiperefresh.setOnRefreshListener {
             Log.v("SWIPEEEEEEEE........", "Aquí")
             loadTopics()
@@ -99,15 +122,28 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
 
 
+    } //onViewCreated
+
+
+    fun getFilteredText(text: String){
+        Log.d(".............Topics Fragment",".. get FILTERED TEXT")
+        loadFilteredTopics(text)
+
     }
+
+
 
     override fun onRefresh() {
         loadTopics()
     }
 
-    override fun onResume() {
+   override fun onResume() {
         super.onResume()
-        loadTopics()
+        Log.d("............TopicsFragment", "__________onResume, vamos a loadTopics()")
+
+
+      loadTopics()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -120,12 +156,13 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         return super.onOptionsItemSelected(item)
     }
 
+
+
+
     // ______________________________________LOAD TOPICS____________________________________________
 
     private fun loadTopics() {
-        enableLoading(true)
-
-
+       enableLoading(true)
 
         context?.let {
             TopicsRepo.getTopics(it,
@@ -139,7 +176,66 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     handleRequestError(it)
                 })
         }
+
+
     }
+
+    // ______________________________________LOAD FILTERED TOPICS____________________________________________
+
+
+    private fun loadFilteredTopics(text: String) {
+      // enableLoading(true)
+    Log.d("..............TopicsFragment","LoadFilteredTopics, vamos a Topics Repo.getFilteredText")
+
+        //listTopics.removeAllViews()
+
+
+        context?.let {
+            TopicsRepo.getFilteredTopics(text, it,
+                {
+                    enableLoading(false)
+
+
+                  val topics = mutableListOf<Topic>()
+                    //var filteredTopics : List<Topic>
+
+                  //  val topics : MutableList<Topic> = ArrayList()
+
+
+                    var filteredTopic : Topic
+
+                    for (i in 0 until (it.size)-1) {
+
+                        var filteredTopic = Topic(it[i].id,it[i].title,it[i].date,it[i].posts,0)
+
+                       /* filteredTopic.id = it[i].id
+                        filteredTopic.posts = it[i].posts
+                        filteredTopic.title = it[i].title
+                        filteredTopic.date = it[i].date
+                        filteredTopic.views = 0*/
+
+                       topics.add(filteredTopic)
+
+                    }
+
+                    //listTopics.removeAllViews()
+
+                    adapter.setTopics(topics)
+
+
+
+
+                },
+                {
+                    enableLoading(false)
+                    handleRequestError(it)
+                })
+        }
+    }
+
+
+
+
 
     // ______________________________________LOAD TOPICS____________________________________________
 
@@ -156,6 +252,8 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             viewLoading.visibility = View.INVISIBLE
         }
     }
+
+
 
     private fun handleRequestError(requestError: RequestError) {
         listTopics.visibility = View.INVISIBLE
@@ -178,16 +276,15 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     private fun goToPosts(it: Topic) {
-
         listener?.onTopicSelected(it)
     }
 
-    interface TopicsInteractionListener {
-            fun onTopicSelected(topic: Topic)
-            fun onGoToCreateTopic()
 
-            fun onLogOut()
-          fun onGoToLatestPosts()
+    interface TopicsInteractionListener {
+        fun onTopicSelected(topic: Topic)
+        fun onGoToCreateTopic()
+        fun onLogOut()
+        fun onGoToLatestPosts()
     }
 
 

@@ -16,7 +16,42 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme" /> -->
+            app:popupTheme="@style/AppTheme" />
+
+
+
+        <SearchView
+            android:id="@+id/toolbarTopicsSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|snap|enterAlways"
+            app:popupTheme="?actionBarPopupTheme" />-->
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:imeOptions="actionSearch|flagNoExtractUi"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Light"
+            app:iconifiedByDefault="false"
+            app:queryHint="Escribe algo"
+            app:searchIcon="@null" />
+
+
+
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

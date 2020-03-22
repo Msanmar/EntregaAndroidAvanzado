@@ -9,4 +9,6 @@
         android:id="@+id/action_latest_posts"
         android:title="Go To Latest Posts" />
 
+
+
 </menu>
