@@ -24,6 +24,17 @@ object ApiRoutes {
             .build()
             .toString()
 
+    //https://mdiscourse.keepcoding.io/latest.json?no_definitions=true&page=3&_=1585085343112
+
+    fun getMoreTopics(page: Int) =
+        uriBuilder()
+            .appendPath("latest.json")
+            .appendQueryParameter("no_definitions", "true")
+            .appendQueryParameter("page", "${page.toString()}")
+            .build()
+            .toString()
+
+
     fun getFilteredTopics(term: String, include_blurbs: Boolean) =
         uriBuilder()
            // .appendPath("search/query.json?term=${term}&include_blurbs=true")

@@ -67,6 +67,57 @@ object TopicsRepo {
             .add(request)
     }
 
+//Get More Topics
+
+fun getMoreTopics(
+    page: Int,
+    context: Context,
+    onSuccess: (List<Topic>) -> Unit,
+    onError: (RequestError) -> Unit
+) {
+    Log.d("Get More Topics_____________", page.toString())
+    val username = UserRepo.getUsername(context)
+    val request = UserRequest(
+        username,
+        Request.Method.GET,
+        ApiRoutes.getMoreTopics(page),
+        null,
+        {
+            it?.let {
+                onSuccess.invoke(
+                    Topic.parseTopics(
+                        it
+                    )
+                )
+            }
+
+            if (it == null)
+                onError.invoke(
+                    RequestError(
+                        messageResId = R.string.error_invalid_response
+                    )
+                )
+        },
+        {
+            it.printStackTrace()
+            if (it is NetworkError)
+                onError.invoke(
+                    RequestError(
+                        messageResId = R.string.error_network
+                    )
+                )
+            else
+                onError.invoke(
+                    RequestError(
+                        it
+                    )
+                )
+        })
+
+    ApiRequestQueue.getRequestQueue(context)
+        .add(request)
+}
+
 
 
 

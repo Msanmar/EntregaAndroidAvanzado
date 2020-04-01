@@ -26,16 +26,18 @@ import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_ID
 import io.keepcoding.eh_ho.posts.EXTRA_TOPIC_TITLE
 import io.keepcoding.eh_ho.posts.PostsActivity
 import io.keepcoding.eh_ho.topics.CreateTopicFragment
+import io.keepcoding.eh_ho.topics.FilterTopicsActivity
 import io.keepcoding.eh_ho.topics.TopicsFragment
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_topics.*
 
-const val EXTRA_TOPIC_ID = "topic_id"
-const val EXTRA_TOPIC_TITLE = "topic_title"
+
 const val TRANSACTION_CREATE_TOPIC = "create_topic"
 const val TRANSACTION_TOPIC_FILTER_FRAGMENT = "topic_filter_fragment"
 const val TRANSACTION_TOPIC_FRAGMENT = "topic_fragment"
+const val EXTRA_QUERY_TEXT = "query"
+
 
 class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicFragment.CreateTopicInteractionListener, LatestPostsFragment.LatestPostInteractionListener  {
 
@@ -100,13 +102,10 @@ var topicsFragment: TopicsFragment = TopicsFragment()
 
 
 
+                val intent = Intent(this@MainActivity,FilterTopicsActivity::class.java)
+                intent.putExtra(EXTRA_QUERY_TEXT, query)
 
-                topicsFragment.getFilteredText(query)
-
-
-                 supportFragmentManager.beginTransaction()
-                   .replace(R.id.parentLayout, topicsFragment)
-                 .commit()
+                startActivity(intent)
 
 
                 return true

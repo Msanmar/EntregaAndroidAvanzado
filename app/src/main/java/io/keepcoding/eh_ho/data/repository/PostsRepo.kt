@@ -39,9 +39,9 @@ object PostsRepo  {
 
         Log.d("GET LATEST POSTS", "...... POSTS REPO.................")
 
-        var db : PostsDatabase = Room.databaseBuilder(
+    /*    var db : PostsDatabase = Room.databaseBuilder(
             context, PostsDatabase::class.java, "posts_database"
-        ).build()
+        ).build() */
 
         val username = UserRepo.getUsername(context)
 
@@ -79,6 +79,7 @@ object PostsRepo  {
                 it.printStackTrace()
                 if (it is NetworkError) { //El error es de red
                     val handler = Handler(context.mainLooper)
+
 
                     thread {
                         val postList = db.postDao().getPosts()

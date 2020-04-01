@@ -5,8 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,23 +12,20 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.eh_ho.R
+import io.keepcoding.eh_ho.data.repository.TopicsRepo
 import io.keepcoding.eh_ho.data.service.RequestError
 import io.keepcoding.eh_ho.domain.Topic
-import io.keepcoding.eh_ho.data.repository.TopicsRepo
-import io.keepcoding.eh_ho.domain.FilteredTopic
-import io.keepcoding.eh_ho.domain.Post
-import io.keepcoding.eh_ho.home.TRANSACTION_TOPIC_FILTER_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_topics.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_topics.buttonCreate
-import kotlinx.android.synthetic.main.fragment_topics.parentLayout
-import kotlinx.android.synthetic.main.fragment_topics.swiperefresh
 import kotlinx.android.synthetic.main.view_retry.*
+
 
 class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     var listener: TopicsInteractionListener? = null
-
+    //var mLoading : Boolean = true
+    var lastPage : Boolean = false
+    var page : Int = 0
+    var maxPageSize : Int = 30
 
     lateinit var adapter: TopicsAdapter
 
@@ -69,7 +64,6 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         Log.d("............TopicsFragment", "__________onCreateView")
 
 
-
         return inflater.inflate(R.layout.fragment_topics, container, false)
     }
 
@@ -86,14 +80,68 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         //Mover floating según el scroll
         listTopics.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
+
+            var mPreviousTotal : Int = 0
+            var page: Int = 1
+
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy<0) {
+
+                Log.d("Al inicio de onScrolled.....Page:", page.toString() )
+
+                val visibleItemCount = listTopics.childCount
+                Log.d("Scroll Listener, visibleItemCount",visibleItemCount.toString())
+                val totalItemCount = (listTopics.layoutManager as LinearLayoutManager).itemCount
+                Log.d("Scroll Listener, totalItemCount", totalItemCount.toString())
+                val firstVisibleItemPosition = (listTopics.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                Log.d("Scroll Listener, firstVisibleItemPosition", firstVisibleItemPosition.toString())
+
+               /* if (mLoading) {
+                    if (totalItemCount > mPreviousTotal) {
+                        mLoading = false
+                        mPreviousTotal = totalItemCount
+
+                    }
+                }*/
+
+                val visibleThreshold = 0 //margen extra de elementos visibles
+
+                if ( !lastPage && (totalItemCount-visibleItemCount) <= (firstVisibleItemPosition + visibleThreshold)) {
+
+                    Log.d("On Scrolled cumple condiciones para cargar más.......Page:", page.toString() )
+                    maxPageSize = maxPageSize + 30
+                    loadMoreTopics(page)
+                    page++
+
+                }
+
+
+                //Mostramos o ocultamos botón según el scroll
+                if (dy<0) { //Scrolling down
                     buttonCreate.show()
-                }else if (dy>0) {
+                }else if (dy>0) { //Scrolling up
                     buttonCreate.hide()
                 }
             }
+
+            /*
+
+                int visibleItemCount = layoutManager.getChildCount();
+    int totalItemCount = layoutManager.getItemCount();
+    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+    if (!isLoading() && !isLastPage()) {
+      if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+          && firstVisibleItemPosition >= 0
+          && totalItemCount >= PAGE_SIZE) {
+        loadMoreItems();
+      }
+    }
+
+
+             */
+
+
+
 
         })
 
@@ -180,6 +228,34 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     }
 
+
+    // ______________________________________LOAD MORE TOPICS____________________________________________
+
+    private fun loadMoreTopics(page: Int) {
+        enableLoading(true)
+
+        context?.let {
+            TopicsRepo.getMoreTopics(page, it,
+                {
+                    enableLoading(false)
+                    if (it.count()<30) {
+                        Log.d("______________fIN", "Se recuperan menos de 30 topics")
+                        lastPage = true
+                    }
+                    adapter.addMoreTopics(it)
+
+                },
+                {
+                    enableLoading(false)
+                    handleRequestError(it)
+                })
+        }
+
+
+    }
+
+
+
     // ______________________________________LOAD FILTERED TOPICS____________________________________________
 
 
@@ -207,21 +283,13 @@ class TopicsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     for (i in 0 until (it.size)-1) {
 
                         var filteredTopic = Topic(it[i].id,it[i].title,it[i].date,it[i].posts,0)
-
-                       /* filteredTopic.id = it[i].id
-                        filteredTopic.posts = it[i].posts
-                        filteredTopic.title = it[i].title
-                        filteredTopic.date = it[i].date
-                        filteredTopic.views = 0*/
-
-                       topics.add(filteredTopic)
+                        topics.add(filteredTopic)
 
                     }
 
                     //listTopics.removeAllViews()
 
                     adapter.setTopics(topics)
-
 
 
 

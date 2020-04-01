@@ -16,10 +16,12 @@ class UtilsModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun providePostDb(ctx: Context): PostsDatabase = Room.databaseBuilder(
+    /*fun providePostDb(ctx: Context): PostsDatabase = Room.databaseBuilder(
         context, PostsDatabase::class.java, "posts_database"
+    ).build()*/
+
+    fun providePostDb(ctx: Context): PostsDatabase = Room.databaseBuilder(
+        ctx, PostsDatabase::class.java, "posts_database"
     ).build()
-
-
 
 }

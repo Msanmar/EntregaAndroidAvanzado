@@ -43,6 +43,14 @@ class TopicsAdapter(
         notifyDataSetChanged()
     }
 
+    fun addMoreTopics(topics: List<Topic>) {
+        Log.d("topics antes de añadir.......", this.topics.count().toString())
+        this.topics.addAll(topics)
+        Log.d("addMoreTopics...... añadimos y en total hay ya....", this.topics.count().toString())
+        notifyDataSetChanged()
+    }
+
+
     inner class TopicHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var topic: Topic? = null
             set(value) {

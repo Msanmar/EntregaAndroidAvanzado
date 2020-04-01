@@ -17,6 +17,7 @@ import io.keepcoding.eh_ho.di.UtilsModule
 import io.keepcoding.eh_ho.domain.LatestPost
 
 import kotlinx.android.synthetic.main.latest_posts_fragment.*
+import javax.inject.Inject
 
 
 class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -25,7 +26,8 @@ class LatestPostsFragment () : Fragment(), SwipeRefreshLayout.OnRefreshListener 
     var listener: LatestPostInteractionListener? = null
     lateinit var adapter: LatestPostsAdapter
 
-
+    @Inject
+    lateinit var injectedPostsRepo: PostsRepo
 
     override fun onAttach(context: Context) {
       //  Log.d("LATEST POST FRAGMENT ","ON ATTACH______________****************************************")
@@ -103,7 +105,7 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
 
 
         context?.let {
-            PostsRepo.getLatestPosts(it,
+            injectedPostsRepo.getLatestPosts(it,
                 {
                    // enableLoading(false)
                     Log.d("éxito.................", "LOAD")
@@ -123,36 +125,7 @@ Log.d("LOAD LATEST POSTS..........", "LOAD")
 private fun goToTopic(it: LatestPost) {
     listener?.onPostSelected(it)
 }
-    // ______________________________________LOAD LATEST POSTS____________________________________________
 
-   /* private fun enableLoading(enabled: Boolean) {
-        viewRetry.visibility = View.INVISIBLE
-
-        if (enabled) {
-            listTopics.visibility = View.INVISIBLE
-            buttonCreate.hide()
-            viewLoading.visibility = View.VISIBLE
-        } else {
-            listTopics.visibility = View.VISIBLE
-            buttonCreate.show()
-            viewLoading.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun handleRequestError(requestError: RequestError) {
-        listTopics.visibility = View.INVISIBLE
-        viewRetry.visibility = View.VISIBLE
-
-        val message = if (requestError.messageResId != null)
-            getString(requestError.messageResId)
-        else if (requestError.message != null)
-            requestError.message
-        else
-            getString(R.string.error_request_default)
-
-        Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show()
-    }
-*/
 
     interface LatestPostInteractionListener {
         fun onPostSelected(latestPost: LatestPost)

@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".posts.PostsActivity"></activity>
         <activity android:name=".topics.TopicsActivity" ></activity>
+        <activity android:name=".topics.FilterTopicsActivity"></activity>
         <activity android:name=".latestposts.LatestPostsActivity"></activity>
         <activity android:name=".home.MainActivity"></activity>
 
